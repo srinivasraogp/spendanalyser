@@ -6,4 +6,5 @@ import com.hcl.spendanalyser.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
+	
 }

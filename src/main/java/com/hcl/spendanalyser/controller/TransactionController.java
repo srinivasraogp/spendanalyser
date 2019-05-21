@@ -2,10 +2,7 @@ package com.hcl.spendanalyser.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,11 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hcl.spendanalyser.beans.TransactionDailyResponse;
+import com.hcl.spendanalyser.dto.MonthlyReportDTO;
 import com.hcl.spendanalyser.model.Transaction;
 import com.hcl.spendanalyser.service.TransactionService;
 import com.hcl.spendanalyser.service.TransactionServiceReports;
@@ -108,4 +105,13 @@ public class TransactionController {
 		 return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.CREATED);
 	    }
 
+	 
+	 @GetMapping("/spends/monthly/{user_id}")
+		public ResponseEntity<List<MonthlyReportDTO>> retrieveMonthluySpends(@PathVariable Long user_id) {
+			logger.info("===retrieveMonthluySpends=========");
+			List<MonthlyReportDTO> results = transactionService.getMonthlyReport(user_id);
+			logger.info("===results=========");
+			return new ResponseEntity(results, HttpStatus.OK);
+		}
+		
 }

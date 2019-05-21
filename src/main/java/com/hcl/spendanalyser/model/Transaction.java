@@ -23,10 +23,14 @@ public class Transaction implements Serializable {
 
     @Id		
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long transaction_id;
+    
 	private Long user_id;
 	private Long prod_id;
-	private Date date;
+	private String prod_name;
+	private Date transaction_date;
 	private Integer qty;
-	private BigDecimal amount;
+	private BigDecimal price;
+	private BigDecimal total;
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcl.spendanalyser.beans.TransactionDailyResponse;
 import com.hcl.spendanalyser.dto.MonthlyReportDTO;
 import com.hcl.spendanalyser.dto.WeeklyReportDTO;
 import com.hcl.spendanalyser.model.Transaction;
@@ -16,10 +17,10 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	TransactionRepository transactionRepository;
 
-	@Override
-	public Transaction saveTransaction(Transaction transaction) {
-		return transactionRepository.save(transaction);
-	}
+//	@Override
+//	public Transaction saveTransaction(Transaction transaction) {
+//		return transactionRepository.save(transaction);
+//	}
 
 	@Override
 	public 	List<Transaction> saveTransactions(List<Transaction> transactions) {
@@ -34,5 +35,11 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<WeeklyReportDTO> getWeeklyReport(Long userId) {
 		return transactionRepository.getWeeklyReport(userId);
+	}
+	
+	@Override
+	public List<TransactionDailyResponse> getUserSpendDailyTransactions(Long userId) {
+		List<TransactionDailyResponse> list =  transactionRepository.getUserSpendDailyTransactions(userId);
+		return list;
 	}
 }

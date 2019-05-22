@@ -18,13 +18,14 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.hcl.spendanalyser.controller.TransactionController;
 import com.hcl.spendanalyser.dto.MonthlyReportDTO;
 import com.hcl.spendanalyser.service.TransactionService;
 
 import junit.framework.Assert;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = TransactionControllerTest.class, secure = false)
+@WebMvcTest(value = TransactionController.class, secure = false)
 public class TransactionControllerTest {
 
 	@Autowired
@@ -34,7 +35,6 @@ public class TransactionControllerTest {
 	private TransactionService transactionService;
 	
 	List<MonthlyReportDTO> mockData = new ArrayList<MonthlyReportDTO>(); 
-	
 	
 	@BeforeStep
 	public void addData() {
@@ -48,15 +48,15 @@ public class TransactionControllerTest {
 	}
 	
 	@Test
-	public void retrieveDetailsForCourse() throws Exception {
+	public void retrieveMonthlySpendsSuccess() throws Exception {
 
 		Mockito.when(
 				transactionService.getMonthlyReport(Mockito.anyLong())).thenReturn(mockData);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-				"/spendanalyser/api//spends/monthly/111").accept(
+				"/spendanalyser/api/dailyspend/111").accept(
 						MediaType.APPLICATION_JSON);
-
+		
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
 		System.out.println("Results========"+result.getResponse().getContentAsString());

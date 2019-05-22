@@ -21,7 +21,7 @@ import com.hcl.spendanalyser.dto.MonthlyReportDTO;
 import com.hcl.spendanalyser.dto.WeeklyReportDTO;
 import com.hcl.spendanalyser.model.Transaction;
 import com.hcl.spendanalyser.service.TransactionService;
-import com.hcl.spendanalyser.service.TransactionServiceReports;
+//import com.hcl.spendanalyser.service.TransactionServiceReports;
 import com.hcl.spendanalyser.util.CsvUtils;
 
 @RestController
@@ -37,8 +37,8 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@Autowired
-	TransactionServiceReports transService;
+//	@Autowired
+//	TransactionServiceReports transService;
 
 
 
@@ -53,7 +53,7 @@ public class TransactionController {
 	@GetMapping("/dailyspend/{userId}")
 	public ResponseEntity<List <TransactionDailyResponse>> dailySpendReport(@PathVariable Long userId){
 		logger.debug("Getting Daily Transactions Starts ==========>> ");
-		List<TransactionDailyResponse> dailyList = transService.getUserSpendDailyTransactions(userId);
+		List<TransactionDailyResponse> dailyList = transactionService.getUserSpendDailyTransactions(userId);
 
 		logger.debug("Getting Daily Transactions ends ==========>> " + dailyList);
 		return new ResponseEntity<List<TransactionDailyResponse>>(dailyList, HttpStatus.OK);

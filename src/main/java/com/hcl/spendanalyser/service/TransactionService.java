@@ -2,17 +2,20 @@ package com.hcl.spendanalyser.service;
 
 import java.util.List;
 
+import com.hcl.spendanalyser.beans.TransactionDailyResponse;
 import com.hcl.spendanalyser.dto.MonthlyReportDTO;
 import com.hcl.spendanalyser.dto.WeeklyReportDTO;
 import com.hcl.spendanalyser.model.Transaction;
 
 public interface TransactionService {
 
-	Transaction saveTransaction(Transaction transaction);
+//	Transaction saveTransaction(Transaction transaction);
 	
 	List<Transaction> saveTransactions(List<Transaction> transactions);
 	
 	List<MonthlyReportDTO> getMonthlyReport(Long userId);
 	
 	List<WeeklyReportDTO> getWeeklyReport(Long userId);
+	
+	List<TransactionDailyResponse> getUserSpendDailyTransactions(Long userId);
 }

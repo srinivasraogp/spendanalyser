@@ -28,8 +28,8 @@ public class ProductController {
 	public ResponseEntity<List<ProductMonthlyReportDTO>> retrieveMonthluySpends(@PathVariable Long prod_id) {
 		logger.info("===retrieveMonthluySpends=========");
 		List<ProductMonthlyReportDTO> results = productService.getMonthlyReport(prod_id);
-		logger.info("===results=========");
-		return new ResponseEntity(results, HttpStatus.OK);
+		logger.info("===results========="+results);
+		return new ResponseEntity<List<ProductMonthlyReportDTO>>(results, HttpStatus.OK);
 	}
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -68,11 +69,11 @@ public class TransactionController {
 	 */
 	
 
-	@PostMapping(value = "/transactions", consumes = "text/csv")
-    public ResponseEntity<List<Transaction>> uploadSimple(@RequestBody InputStream body) throws IOException {
-		List<Transaction> transactions = transactionService.saveTransactions(CsvUtils.read(Transaction.class, body));
-        return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.CREATED);
-    }
+//	@PostMapping(value = "/transactions", consumes = "text/csv")
+//    public ResponseEntity<List<Transaction>> uploadSimple(@RequestBody InputStream body) throws IOException {
+//		List<Transaction> transactions = transactionService.saveTransactions(CsvUtils.read(Transaction.class, body));
+//        return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.CREATED);
+//    }
 	
 	
 
@@ -88,7 +89,7 @@ public class TransactionController {
 			return new ResponseEntity<List <TransactionDailyResponse>>(dailyList, HttpStatus.FOUND);
 			}
 
-//	@PostMapping(value = "/transactions", consumes="text/csv")
+//	@PostMapping(value = "/transactions2", consumes="text/csv")
 //	@ResponseBody
 //    public ResponseEntity<List<Transaction>> uploadSimple(@RequestBody InputStream body) throws IOException {
 //		logger.info("===uploadSimple=========");

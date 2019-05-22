@@ -6,11 +6,19 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Setter @Getter @NoArgsConstructor
+@Setter @Getter @NoArgsConstructor @ToString
 public class TransactionDailyResponse {
-	private long user_id;
+	private Long user_id;
 	private Date transaction_date;
 	private BigDecimal total;
+	
+	public TransactionDailyResponse(Long user_id, Date transaction_date, BigDecimal total) {
+		super();
+		this.user_id = user_id;
+		this.transaction_date = transaction_date;
+		this.total = total;
+	}
 
 }

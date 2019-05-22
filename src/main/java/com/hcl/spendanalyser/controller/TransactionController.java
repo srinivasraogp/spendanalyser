@@ -1,8 +1,6 @@
 package com.hcl.spendanalyser.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,15 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hcl.spendanalyser.beans.TransactionDailyResponse;
 import com.hcl.spendanalyser.dto.MonthlyReportDTO;
+import com.hcl.spendanalyser.dto.WeeklyReportDTO;
 import com.hcl.spendanalyser.model.Transaction;
 import com.hcl.spendanalyser.service.TransactionService;
 import com.hcl.spendanalyser.service.TransactionServiceReports;
@@ -80,13 +77,11 @@ public class TransactionController {
 		
 			@GetMapping("/dailyspend/{userId}")
 			public ResponseEntity<List <TransactionDailyResponse>> dailySpendReport(@PathVariable Long userId){
-			List dailyList = new ArrayList<TransactionDailyResponse>();
-			logger.debug("Getting Daily Transactions Starts ==========>> ");
-		
-			dailyList = transService.getUserSpendDailyTransactions(userId);
+				logger.debug("Getting Daily Transactions Starts ==========>> ");
+			List<TransactionDailyResponse> dailyList = transService.getUserSpendDailyTransactions(userId);
 			
-			logger.debug("Getting Daily Transactions ends ==========>> ");
-			return new ResponseEntity<List <TransactionDailyResponse>>(dailyList, HttpStatus.FOUND);
+			logger.debug("Getting Daily Transactions ends ==========>> " + dailyList);
+			return new ResponseEntity<List<TransactionDailyResponse>>(dailyList, HttpStatus.OK);
 			}
 
 //	@PostMapping(value = "/transactions2", consumes="text/csv")
@@ -108,11 +103,19 @@ public class TransactionController {
 
 	 
 	 @GetMapping("/spends/monthly/{user_id}")
-		public ResponseEntity<List<MonthlyReportDTO>> retrieveMonthluySpends(@PathVariable Long user_id) {
+		public ResponseEntity<List<MonthlyReportDTO>> retrieveMonthlySpends(@PathVariable Long user_id) {
 			logger.info("===retrieveMonthluySpends=========");
 			List<MonthlyReportDTO> results = transactionService.getMonthlyReport(user_id);
 			logger.info("===results=========");
-			return new ResponseEntity(results, HttpStatus.OK);
+			return new ResponseEntity<List<MonthlyReportDTO>>(results, HttpStatus.OK);
+		}
+	 
+	 @GetMapping("/spends/weekly/{user_id}")
+		public ResponseEntity<List<WeeklyReportDTO>> retrieveWeeklySpends(@PathVariable Long user_id) {
+			logger.info("===retrieveWeeklySpends=========");
+			List<WeeklyReportDTO> results = transactionService.getWeeklyReport(user_id);
+			logger.info("===results=========");
+			return new ResponseEntity<List<WeeklyReportDTO>>(results, HttpStatus.OK);
 		}
 		
 }
